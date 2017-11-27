@@ -54,6 +54,10 @@ bytes@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.0.0.tgz#d32815404d689699f85a4ea4fa8755dd13a96048"
 
+caseless@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
+
 castv2-client@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/castv2-client/-/castv2-client-1.2.0.tgz#a9193b1a5448b8cb9a0415bd021c8811ed7b0544"
@@ -194,6 +198,10 @@ ipaddr.js@1.5.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.5.2.tgz#d4b505bde9946987ccf0fc58d9010ff9607e3fa0"
 
+is-typedarray@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/is-typedarray/-/is-typedarray-1.0.0.tgz#e479c80858df0c1b11ddda6940f96011fcda4a9a"
+
 "long@~2 >=2.2.3":
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/long/-/long-2.4.0.tgz#9fa180bb1d9500cdc29c4156766a1995e1f4524f"
@@ -243,6 +251,10 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
+node-fetch@^2.0.0-alpha.8:
+  version "2.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.0.0-alpha.9.tgz#990c0634f510f76449a0d6f6eaec96b22f273628"
+
 on-finished@~2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/on-finished/-/on-finished-2.3.0.tgz#20f1336481b083cd75337992a16971aa2d906947"
@@ -278,6 +290,14 @@ proxy-addr@~2.0.2:
 qs@6.5.1:
   version "6.5.1"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.1.tgz#349cdf6eef89ec45c12d7d5eb3fc0c870343a6d8"
+
+r2@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/r2/-/r2-2.0.0.tgz#fadc6558ac96f230d3dfa5bc039f0f97771968d9"
+  dependencies:
+    caseless "^0.12.0"
+    node-fetch "^2.0.0-alpha.8"
+    typedarray-to-buffer "^3.1.2"
 
 range-parser@~1.2.0:
   version "1.2.0"
@@ -345,6 +365,12 @@ type-is@~1.6.15:
   dependencies:
     media-typer "0.3.0"
     mime-types "~2.1.15"
+
+typedarray-to-buffer@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/typedarray-to-buffer/-/typedarray-to-buffer-3.1.2.tgz#1017b32d984ff556eba100f501589aba1ace2e04"
+  dependencies:
+    is-typedarray "^1.0.0"
 
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"

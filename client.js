@@ -1,4 +1,6 @@
-function playVideo(url) {
+const host = process.env.DS_TVHUB ? `https://${process.env.DS_TVHUB}` : 'http://localhost:3000';
+
+function playVideo(url, successCB, errorCB, title = 'unknown') {
     var Client = require('castv2-client').Client;
     var DefaultMediaReceiver = require('castv2-client').DefaultMediaReceiver;
     var mdns = require('mdns');
@@ -23,11 +25,13 @@ function playVideo(url) {
             console.log('connected, launching app ...');
 
             client.launch(DefaultMediaReceiver, function (err, player) {
-                if (player === undefined)
+                if (player === undefined) {
+                    errorCB(new Error('player is undefiend'));
+                    console.log('player undefined', err);
                     return;
+                }
 
                 var media = {
-
                     // Here you can plug an URL to any mp4, webm, mp3 or jpg file with the proper contentType.
                     contentId: url,
                     contentType: 'video/mp4',
@@ -37,20 +41,25 @@ function playVideo(url) {
                     metadata: {
                         type: 0,
                         metadataType: 0,
-                        title: "Big Buck Bunny",
+                        title,
                         images: [
-                            { url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg' }
+                            { url: `${host}/dsopicture.jpg` }
                         ]
                     }
                 };
 
                 player.on('status', function (status) {
-                    console.log('status broadcast playerState=%s', status.playerState);
+                    if (status) {
+                        console.log('status broadcast playerState=%s', status.playerState);
+                    }
                 });
 
                 console.log('app "%s" launched, loading media %s ...', player.session.displayName, media.contentId);
 
                 player.load(media, { autoplay: true }, function (err, status) {
+                    if (!err) {
+                        successCB();
+                    }
                     console.log('media loaded playerState=%s', status.playerState);
                 });
 
@@ -59,6 +68,7 @@ function playVideo(url) {
         });
 
         client.on('error', function (err) {
+            errorCB(err);
             console.log('Error: %s', err.message);
             client.close();
         });
