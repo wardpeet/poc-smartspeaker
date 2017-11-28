@@ -30,7 +30,7 @@ function playVideo(url, successCB, errorCB, title = 'unknown') {
 
             client.launch(DefaultMediaReceiver, function (err, player) {
                 if (player === undefined) {
-                    errorCB(new Error('player is undefiend'));
+                    errorCB(new Error('player is undefined'));
                     console.log('player undefined', err);
                     return;
                 }
