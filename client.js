@@ -1,4 +1,4 @@
-const host = process.env.DS_TVHUB ? `https://${process.env.DS_TVHUB}` : 'http://localhost:3000';
+const HOSTORIGIN = process.env.DS_TVHUB ? `https://${process.env.DS_TVHUB}` : 'http://localhost:3000';
 
 function playVideo(url, successCB, errorCB, title = 'unknown') {
     var Client = require('castv2-client').Client;
@@ -6,9 +6,13 @@ function playVideo(url, successCB, errorCB, title = 'unknown') {
     var mdns = require('mdns');
 
     DefaultMediaReceiver.APP_ID = 'D8CDBF0A';
+    console.log(`Trying to play ${title} (${url})`)
 
     var browser = mdns.createBrowser(mdns.tcp('googlecast'));
 
+    browser.on('error', function(service) {
+        console.log('down down down');
+    })
     browser.on('serviceUp', function (service) {
         console.log('found device "%s" at %s:%d', service.name, service.addresses[0], service.port);
         ondeviceup(service.addresses[0]);
@@ -43,7 +47,7 @@ function playVideo(url, successCB, errorCB, title = 'unknown') {
                         metadataType: 0,
                         title,
                         images: [
-                            { url: `${host}/dsopicture.jpg` }
+                            { url: `${HOSTORIGIN}/dsopicture.jpg` }
                         ]
                     }
                 };

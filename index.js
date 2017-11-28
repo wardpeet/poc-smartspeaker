@@ -11,7 +11,8 @@ app.all('/json', (req, res) => {
     if (url) {
         r2(url).json.then(data => {
             const { url, title } = data.videos[index];
-            playVideo(url, success, error, title);
+            playVideo(url, () => {}, () => {}, title);
+            success(res)();
         });
     } else {
         res.send('No video file given');
@@ -21,7 +22,7 @@ app.all('/json', (req, res) => {
 app.all('/video', (req, res) => {
     let url = req.query.url;
     if (url) {
-        playVideo(url, success, error);
+        playVideo(url, success(res), error(res));
     } else {
         res.send('No video url given');
     }
